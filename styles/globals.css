@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #2c3e50;
+    --note-color: #fef68a;
+    --note-shadow: rgba(0, 0, 0, 0.4);
+    --ink-color: #2c3e50;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Kalam', cursive;
+    background-color: var(--bg-color);
+    /* Subtle wood/desk texture pattern */
+    background-image: radial-gradient(#34495e 15%, transparent 16%),
+        radial-gradient(#34495e 15%, transparent 16%);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    color: var(--ink-color);
+    overscroll-behavior: none;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Prevent scrolling outside on mobile */
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* The Sticky Note Container */
+main {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    background-color: var(--note-color);
+    box-shadow: 10px 10px 20px var(--note-shadow);
+    transform: rotate(-3deg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+main:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 15px 15px 25px var(--note-shadow);
+    z-index: 10;
+}
+
+/* "Tape" effect */
+main::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 35px;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+header {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    left: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    pointer-events: none;
+    /* Let clicks pass through to textarea area if overlapped */
+}
+
+h1 {
+    font-size: 1rem;
+    color: rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+    transform: rotate(2deg);
+}
+
+.status {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.status.connected {
+    color: #27ae60;
+}
+
+.status.disconnected {
+    color: #c0392b;
+}
+
+textarea {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    color: var(--ink-color);
+    border: none;
+    resize: none;
+    font-family: 'Kalam', cursive;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    outline: none;
+    margin-bottom: 20px;
+    /* Space for footer */
+}
+
+textarea::placeholder {
+    color: rgba(44, 62, 80, 0.4);
+}
+
+@media (max-width: 400px) {
+    .container {
+        padding: 10px;
+    }
+
+    main {
+        width: 90vw;
+        height: 80vw;
+    }
+}
